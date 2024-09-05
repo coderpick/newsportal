@@ -39,7 +39,7 @@ if (isset($_POST['register'])) {
 
     if (count($errors) == 0) {
 
-        $sql = "INSERT INTO admin (name, email, password) VALUES (:name, :email, :password)";
+        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
 
         if ($stmt = $pdo->prepare($sql)) {
             $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);

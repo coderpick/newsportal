@@ -2,10 +2,10 @@
 session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: dashboard.php");
-    exit;
-}
+// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true && $_SESSION['type'] != 'user') {
+//     header("location: dashboard.php");
+//     exit;
+// }
 
 $filepath = realpath(dirname(__FILE__));
 include $filepath . "/../db/connection.php";
@@ -42,7 +42,7 @@ if (isset($_POST['login'])) {
     if (count($errors) == 0) {
 
 
-        $sql = "SELECT * FROM admin WHERE email=:email";
+        $sql = "SELECT * FROM users WHERE email=:email";
 
         $stmt = $pdo->prepare($sql);
 
@@ -52,28 +52,42 @@ if (isset($_POST['login'])) {
 
             if ($stmt->rowCount() == 1) {
 
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $row = $stmt->fetch(PDO::FETCH_OBJ);
 
-
-                $userId         = $row["id"];
-                $hash_password  = $row["password"];
-
-                if (password_verify($data['password'], $hash_password)) {
+                if (password_verify($data['password'], $row->password)) {
 
                     $_SESSION["loggedin"] = true;
-                    $_SESSION['name']   = $row['name'];
-                    $_SESSION['userId'] = $row['id'];
+                    $_SESSION['name']   = $row->name;
+                    $_SESSION['userId'] = $row->id;
+                    $_SESSION['type']   = $row->type;
 
-                    header("Location:dashboard.php");
-                } else {
-                    $errors["password"] = "Password does not match!";
+                    if ($_SESSION['type'] == "admin") {
+
+                        header("Location:dashboard.php");
+                        exit();
+                    }
+
+                    if ($_SESSION['type'] == "editor") {
+
+                        header("Location:editor_dashboard.php");
+                        exit();
+                    }
+
+                    if ($_SESSION['type'] == "user") {
+
+                        header("Location:../index.php");
+                        exit();
+                    }
                 }
             } else {
-                $errors["email"] = "Email is not found";
+                $errors["password"] = "Password does not match!";
             }
+        } else {
+            $errors["email"] = "Email is not found";
         }
     }
 }
+
 
 function validate($data)
 {
