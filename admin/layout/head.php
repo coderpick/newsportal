@@ -1,10 +1,12 @@
 <?php
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if ($_SESSION["loggedin"] == false && $_SESSION["type"] !== "admin") {
-    header("location: index.php");
-    exit;
+
+
+// Only allow access if the user is an admin or editor
+if (!isset($_SESSION['role']) || ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'editor')) {
+    header("Location:../../index.php");
+    exit();
 }
 
 ?>

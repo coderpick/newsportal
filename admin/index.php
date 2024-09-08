@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-// if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true && $_SESSION['type'] != 'user') {
-//     header("location: dashboard.php");
-//     exit;
-// }
+// Check if the user is already logged in
+if (isset($_SESSION['role'])) {
+    // Redirect based on the role
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'editor') {
+        header("Location: dashboard.php");
+    }
+}
+
 
 $filepath = realpath(dirname(__FILE__));
 include $filepath . "/../db/connection.php";
@@ -56,27 +59,15 @@ if (isset($_POST['login'])) {
 
                 if (password_verify($data['password'], $row->password)) {
 
-                    $_SESSION["loggedin"] = true;
                     $_SESSION['name']   = $row->name;
-                    $_SESSION['userId'] = $row->id;
-                    $_SESSION['type']   = $row->type;
 
-                    if ($_SESSION['type'] == "admin") {
+                    $_SESSION['role']   = $row->role;
+
+                    if ($_SESSION['role'] == "admin" || $_SESSION['role'] == "editor") {
 
                         header("Location:dashboard.php");
-                        exit();
-                    }
-
-                    if ($_SESSION['type'] == "editor") {
-
-                        header("Location:editor_dashboard.php");
-                        exit();
-                    }
-
-                    if ($_SESSION['type'] == "user") {
-
+                    } else {
                         header("Location:../index.php");
-                        exit();
                     }
                 }
             } else {
