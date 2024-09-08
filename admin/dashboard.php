@@ -1,80 +1,143 @@
 <?php
-include('layout/head.php');
+include "layout/head.php";
 ?>
 
 <body>
-  <!--  sidebar -->
-  <?php
-  include('layout/sidebar.php');
-  ?>
-  <!--  sidebar -->
-
-
-  <!-- header nav -->
-  <?php
-  include('layout/header.php');
-  ?>
-  <!-- header nav -->
-
-
-
-  <div class="content-wrap">
-    <div class="main">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-8 p-r-0 title-margin-right">
-            <div class="page-header">
-              <div class="page-title">
-                <h1>Hello, <span>Welcome Here</span></h1>
-              </div>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <?php
+    include "layout/sidebar.php";
+    ?>
+    <!-- End Sidebar -->
+    <div class="main-panel">
+      <div class="main-header">
+        <div class="main-header-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/img/kaiadmin/logo_light.svg"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="20" />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
             </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
           </div>
-          <!-- /# column -->
-          <div class="col-lg-4 p-l-0 title-margin-left">
-            <div class="page-header">
-              <div class="page-title">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                  <li class="breadcrumb-item active">UI-Blank</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-          <!-- /# column -->
+          <!-- End Logo Header -->
         </div>
-        <!-- /# row -->
-        <section id="main-content">
+        <!-- Navbar Header -->
+        <?php
+        include "layout/header.php";
+        ?>
+        <!-- End Navbar -->
+      </div>
+
+      <div class="container">
+        <div class="page-inner">
+          <h1>Welcome to admin dashboard</h1>
           <div class="row">
-            <div class="col-lg-12">
-              <div id="extra-area-chart"></div>
-              <div id="morris-line-chart"></div>
-              <div class="footer">
-                <p>2018 © Admin Board. - <a href="#">example.com</a></p>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-primary card-round">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="icon-big text-center">
+                        <i class="fas fa-users"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                      <div class="numbers">
+                        <p class="card-category">Visitors</p>
+                        <h4 class="card-title">1,294</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-info card-round">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="icon-big text-center">
+                        <i class="fas fa-user-check"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                      <div class="numbers">
+                        <p class="card-category">Subscribers</p>
+                        <h4 class="card-title">1303</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-success card-round">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="icon-big text-center">
+                        <i class="fas fa-chart-pie"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                      <div class="numbers">
+                        <p class="card-category">Sales</p>
+                        <h4 class="card-title">$ 1,345</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-secondary card-round">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5">
+                      <div class="icon-big text-center">
+                        <i class="far fa-check-circle"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                      <div class="numbers">
+                        <p class="card-category">Order</p>
+                        <h4 class="card-title">576</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
+      <!-- footer -->
+      <?php
+      include "layout/footer.php";
+      ?>
     </div>
   </div>
-
-
-
-  <div id="search">
-    <button type="button" class="close">×</button>
-    <form>
-      <input type="search" value="" placeholder="type keyword(s) here" />
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-  </div>
-  <!-- jquery vendor -->
+  <!--   Core JS Files   -->
   <?php
-  include('layout/script.php');
+  include "layout/script.php";
   ?>
 
-
-  <script src="assets/js/scripts.js"></script>
-  <!-- scripit init-->
+  <!-- Kaiadmin JS -->
+  <script src="assets/js/kaiadmin.min.js"></script>
 </body>
 
 </html>

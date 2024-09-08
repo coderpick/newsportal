@@ -1,72 +1,126 @@
 <?php
-include('layout/head.php');
+include "layout/head.php";
 ?>
 
 <body>
-    <!--  sidebar -->
-    <?php
-    include('layout/sidebar.php');
-    ?>
-    <!--  sidebar -->
-
-
-    <!-- header nav -->
-    <?php
-    include('layout/header.php');
-    ?>
-    <!-- header nav -->
-
-
-
-    <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>Category</h1>
-                            </div>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <?php
+        include "layout/sidebar.php";
+        ?>
+        <!-- End Sidebar -->
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="index.html" class="logo">
+                            <img
+                                src="assets/img/kaiadmin/logo_light.svg"
+                                alt="navbar brand"
+                                class="navbar-brand"
+                                height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
                         </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
                     </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title d-flex justify-content-end align-items-center">
-                                <a href="categoryCreate.php" class="btn btn-primary">Add New</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+                    <!-- End Logo Header -->
                 </div>
-                <!-- /# row -->
-                <section id="main-content">
+                <!-- Navbar Header -->
+                <?php
+                include "layout/header.php";
+                ?>
+                <!-- End Navbar -->
+            </div>
+
+            <div class="container">
+                <div class="page-inner">
+                    <div class="p-3">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <ul class="breadcrumbs mb-3">
+                                    <li class="nav-home">
+                                        <a href="dashboard.php">
+                                            <i class="icon-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="separator">
+                                        <i class="icon-arrow-right"></i>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="category.php">Category</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <a href="categoryCreate.php" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add New</a>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-md-12">
                             <div class="card">
-
+                                <div class="card-header py-2">
+                                    <h4 class="card-title">Category </h4>
+                                </div>
                                 <div class="card-body">
+                                    <?php
+                                    if (isset($_SESSION['success'])) { ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>Success!</strong> <?php echo $_SESSION['success']; ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php unset($_SESSION['success']);
+                                    }
+                                    ?>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="example">
+                                        <table class="table table-bordered" id="datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Slug</th>
-                                                    <th>Action</th>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Slug</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Category 1</td>
-                                                    <th>category-1</th>
-                                                    <td>
-                                                        <a href="category_edit.php" class="btn btn-success"><i class="ti-pencil"></i></a>
-                                                        <a href="category_edit.php" class="btn btn-danger"><i class="ti-trash"></i></a>
-                                                    </td>
-                                                </tr>
+
+                                                <?php
+
+                                                $sql = "SELECT * FROM category";
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+
+                                                foreach ($categories as $key=> $category) {
+                                                ?>
+                                                    <tr>
+                                                        <td><?php echo $key+1 ?></td>
+                                                        <td><?php echo $category->name ?></td>
+                                                        <td><?php echo $category->slug ?></td>
+                                                        <td>
+                                                            <a href="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
+
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -75,42 +129,32 @@ include('layout/head.php');
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="footer">
-                                <p>2018 © Admin Board. - <a href="#">example.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
+            <!-- footer -->
+            <?php
+            include "layout/footer.php";
+            ?>
         </div>
     </div>
-
-
-
-    <div id="search">
-        <button type="button" class="close">×</button>
-        <form>
-            <input type="search" value="" placeholder="type keyword(s) here" />
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-    </div>
-    <!-- jquery vendor -->
+    <!--   Core JS Files   -->
     <?php
-    include('layout/script.php');
+    include "layout/script.php";
     ?>
 
-    <!-- Datatable -->
-    <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="./js/plugins-init/datatables.init.js"></script>
+    <!-- Datatables -->
+    <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
 
-
-    <script src="assets/js/scripts.js"></script>
-    <!-- scripit init-->
-
-
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+    </script>
 </body>
 
 </html>

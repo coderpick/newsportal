@@ -1,8 +1,5 @@
-  <script src="assets/js/lib/jquery.min.js"></script>
-  <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
-  <!-- nano scroller -->
-  <script src="assets/js/lib/menubar/sidebar.js"></script>
-  <script src="assets/js/lib/preloader/pace.min.js"></script>
-  <!-- sidebar -->
-  <script src="assets/js/lib/bootstrap.min.js"></script>
-  <!-- bootstrap -->
+  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <!-- jQuery Scrollbar -->
+  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
