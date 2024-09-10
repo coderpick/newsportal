@@ -2,7 +2,9 @@
 session_start();
 
 $filepath = realpath(dirname(__FILE__));
+
 include $filepath . "/../../db/connection.php";
+include $filepath . "/../../helpers/helper.php";
 
 // Only allow access if the user is an admin or editor
 if (!isset($_SESSION['role']) || ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'editor')) {
@@ -47,6 +49,12 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] != 'admin' && $_SESSION['rol
             },
         });
     </script>
+
+
+
+    <link rel="stylesheet" href="assets/vendor/summernote/dist/summernote-bs4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/vendor/select2/dist/css/select2.min.css">
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />

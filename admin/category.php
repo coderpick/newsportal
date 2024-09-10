@@ -105,15 +105,15 @@ include "layout/head.php";
                                                 $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
-                                                foreach ($categories as $key=> $category) {
+                                                foreach ($categories as $key => $category) {
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $key+1 ?></td>
+                                                        <td><?php echo $key + 1 ?></td>
                                                         <td><?php echo $category->name ?></td>
                                                         <td><?php echo $category->slug ?></td>
                                                         <td>
-                                                            <a href="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <a href="categoryEdit.php?id=<?php echo $category->id; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                                            <a onclick="return confirm('Are you sure to delete?')"  href="categoryDelete.php?id=<?php echo $category->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php

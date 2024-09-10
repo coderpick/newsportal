@@ -156,20 +156,20 @@ include "layout/head.php";
     <!-- Kaiadmin JS -->
     <script src="assets/js/kaiadmin.min.js"></script>
     <script>
-
-         $(document).ready(function() {
+        $(document).ready(function() {
 
             $("#name").keyup(function() {
 
                 var text = $(this).val();
-                
+
                 text = text.toLowerCase();
-                text = text.replace(/[^a-zA-Z0-9 ]/g, "");
-                text = text.replace(/\s+/g, '-');
-                $("#slug").val(text);   
+                text = text.replace(text, text)
+                text = text.replace(/^-+|-+$/g, '')
+                text = text.replace(/\s/g, '-')
+                text = text.replace(/\-\-+/g, '-');
+                $("#slug").val(text);
             });
         });
-
     </script>
 
 </body>

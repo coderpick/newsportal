@@ -41,6 +41,19 @@
                           <p>Category</p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="tag.php">
+                          <i class="fas fa-th-large"></i>
+                          <p>Tag</p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="post.php">
+                          <i class="fas fa-th-large"></i>
+                          <p>Posts</p>
+                      </a>
+                  </li>
 
                   <li class="nav-item">
                       <a
