@@ -113,7 +113,10 @@ include "layout/head.php";
                                                         <td><?php echo $tag->slug ?></td>
                                                         <td>
                                                             <a href="tagEdit.php?id=<?php echo $tag->id; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <a onclick="return confirm('Are you sure to delete?')"  href="tagDelete.php?id=<?php echo $tag->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <?php
+                                                            if ($_SESSION['role'] == 'admin') { ?>
+                                                                <a onclick="return confirm('Are you sure to delete?')" href="tagDelete.php?id=<?php echo $tag->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                 <?php

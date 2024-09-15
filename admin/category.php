@@ -113,7 +113,12 @@ include "layout/head.php";
                                                         <td><?php echo $category->slug ?></td>
                                                         <td>
                                                             <a href="categoryEdit.php?id=<?php echo $category->id; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <a onclick="return confirm('Are you sure to delete?')"  href="categoryDelete.php?id=<?php echo $category->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <?php
+                                                            if ($_SESSION['role'] == 'admin') { ?>
+                                                                <a onclick="return confirm('Are you sure to delete?')" href="categoryDelete.php?id=<?php echo $category->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <?php      }
+                                                            ?>
+
                                                         </td>
                                                     </tr>
                                                 <?php

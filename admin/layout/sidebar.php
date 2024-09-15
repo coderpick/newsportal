@@ -33,14 +33,16 @@
                           <p>Dashboard</p>
                       </a>
                   </li>
-
-
-                  <li class="nav-item">
-                      <a href="category.php">
-                          <i class="fas fa-th-large"></i>
-                          <p>Category</p>
-                      </a>
-                  </li>
+                  <?php
+                    if ($_SESSION['role'] == 'admin') { ?>
+                      <li class="nav-item">
+                          <a href="category.php">
+                              <i class="fas fa-th-large"></i>
+                              <p>Category</p>
+                          </a>
+                      </li>
+                  <?php } ?>
+                  
                   <li class="nav-item">
                       <a href="tag.php">
                           <i class="fas fa-th-large"></i>

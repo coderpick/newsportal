@@ -102,7 +102,8 @@ include "layout/head.php";
 
                                                 <?php
 
-                                                $sql = "SELECT * FROM post";
+                                                $sql = "SELECT post.*, category.name as categoryName,users.name as author FROM post
+                                                    INNER JOIN category ON post.category_id = category.id INNER JOIN users ON post.user_id = users.id ORDER BY post.id DESC;";
                                                 $stmt = $pdo->prepare($sql);
                                                 $stmt->execute();
                                                 $posts = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -112,14 +113,24 @@ include "layout/head.php";
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $key + 1 ?></td>
-                                                        <td><?php echo $tag->title ?></td>
-                                                        <td><?php echo $tag->title ?></td>
-                                                        <td><?php echo $tag->title ?></td>
-                                                        <td><?php echo $tag->title ?></td>
-                                                        <td><?php echo $tag->title ?></td>
                                                         <td>
-                                                            <a href="postEdit.php?id=<?php echo $tag->id; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                                            <a onclick="return confirm('Are you sure to delete?')" href="postDelete.php?id=<?php echo $tag->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <img style="width: 50px;" src="<?php echo $post->image ?>" alt="">
+                                                        </td>
+                                                        <td><?php echo $post->title ?></td>
+                                                        <td><?php echo $post->categoryName ?></td>
+                                                        <td><?php echo $post->author ?></td>
+                                                        <td><?php echo $post->created_at ?></td>
+
+                                                        <td>
+                                                            <a href="postShow.php?id=<?php echo $post->id; ?>" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                                            <a href="postEdit.php?id=<?php echo $post->id; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+
+                                                            <?php
+                                                            if ($_SESSION['user_id'] == $post->user_id || $_SESSION['role'] == "admin") { ?>
+                                                                <a onclick="return confirm('Are you sure to delete?')" href="postDelete.php?id=<?php echo $post->id; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                            <?php     }
+                                                            ?>
+
                                                         </td>
                                                     </tr>
                                                 <?php
