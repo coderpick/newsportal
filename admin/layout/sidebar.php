@@ -42,7 +42,7 @@
                           </a>
                       </li>
                   <?php } ?>
-                  
+
                   <li class="nav-item">
                       <a href="tag.php">
                           <i class="fas fa-th-large"></i>
@@ -56,27 +56,17 @@
                           <p>Posts</p>
                       </a>
                   </li>
+                  <?php
+                    if ($_SESSION['role'] == 'admin') { ?>
+                      <li class="nav-item">
+                          <a href="user.php">
+                              <i class="fas fa-users"></i>
+                              <p>Admins</p>
+                          </a>
+                      </li>
 
-                  <li class="nav-item">
-                      <a
-                          data-bs-toggle="collapse"
-                          href="#dashboard"
-                          class="collapsed"
-                          aria-expanded="false">
-                          <i class="fas fa-list"></i>
-                          <p>Menu</p>
-                          <span class="caret"></span>
-                      </a>
-                      <div class="collapse" id="dashboard">
-                          <ul class="nav nav-collapse">
-                              <li>
-                                  <a href="../demo1/index.html">
-                                      <span class="sub-item">Menu 1</span>
-                                  </a>
-                              </li>
-                          </ul>
-                      </div>
-                  </li>
+                  <?php } ?>
+
 
               </ul>
           </div>
