@@ -424,6 +424,13 @@ include "layout/head.php";
                 height: 250,
                 placeholder: 'Write post details',
                 tabsize: 2,
+                callbacks: {
+                    onPaste: function(e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                        e.preventDefault();
+                        document.execCommand('insertText', false, bufferText);
+                    }
+                }
             });
 
             /* dropify active */
